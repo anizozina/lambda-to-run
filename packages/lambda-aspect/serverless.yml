@@ -1,0 +1,30 @@
+service: lambda-aspect
+frameworkVersion: '3'
+useDotenv: true
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ap-northeast-1
+  environment:
+    GCLOUD_ACCESS_KEY: ${self:custom.secret}
+    URL: ${env:url}
+
+custom:
+  # created by `aws ssm put-parameter --name /keys/gcloud/service_account --type "SecureString" --value file://$file_path
+  secret: ${ssm(ap-northeast-1,raw):/keys/gcloud/service_account}
+  esbuild:
+    target: 'node18'
+    platform: 'node'
+    plugins: './esbuild-plugin.js'
+    packager: yarn
+
+functions:
+  api:
+    handler: index.handler
+    events:
+      - httpApi:
+          path: /
+          method: get
+
+plugins:
+  - serverless-esbuild

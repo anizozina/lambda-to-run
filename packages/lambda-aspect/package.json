@@ -1,0 +1,26 @@
+{
+  "name": "@anizozina/lambda-aspect",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "deploy": "sls deploy"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/node": "20.3.3",
+    "esbuild": "^0.18.11",
+    "esbuild-node-externals": "^1.8.0",
+    "serverless-esbuild": "^1.45.1",
+    "typescript": "5.1.6"
+  },
+  "dependencies": {
+    "@types/axios": "^0.14.0",
+    "axios": "^1.4.0",
+    "google-auth-library": "^8.9.0"
+  }
+}
